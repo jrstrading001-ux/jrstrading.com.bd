@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRS Trading - Energy Management Solutions</title>
+    <style>
+        /* Base Setup & Modern Variables */
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --secondary: #ecc94b;
+            --secondary-hover: #d69e2e;
+            --text-main: #2d3748;
+            --text-muted: #616e80;
+            --bg-light: #2b6cb0; 
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --radius: 12px;
+            --transition: all 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 140px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Sticky Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 10px 20px;
+            min-height: 70px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .brand-logo img {
+            height: 50px;
+            width: 160px; 
+            object-fit: contain; 
+            border-radius: 6px;
+            background-color: #ffffff;
+            padding: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 4px;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(43, 108, 176, 0.85)), url('hero-bg.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 100px 24px;
+            text-align: center;
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .hero .subtitle-badge {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 15px 0 25px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        .cta-btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 16px 36px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .cta-btn:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Section Layouts */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .divider {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About Us Styles */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 35px 25px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .about-content h3 {
+            color: var(--primary-light);
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        /* Products Layout */
+        .category-title {
+            color: var(--secondary);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 12px;
+            margin: 50px 0 30px 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafbfc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 15px;
+        }
+
+        .model-badge {
+            background-color: #edf2f7;
+            color: #4a5568;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .product-name {
+            color: var(--text-main);
+            margin: 0 0 12px 0;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .quote-btn {
+            background-color: var(--primary-light);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .quote-btn:hover {
+            background-color: var(--primary);
+        }
+
+        /* Gallery Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: var(--transition);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Services Layout */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .service-box {
+            background: var(--bg-card);
+            padding: 30px 25px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--secondary);
+        }
+        .service-box h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 40px;
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        .contact-info h3 {
+            color: var(--primary);
+            margin: 0 0 20px 0;
+            font-size: 1.6rem;
+        }
+        .contact-info > p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        .info-card {
+            background-color: #fafbfc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--secondary);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .info-card p {
+            margin: 8px 0 0 0;
+            color: var(--text-main);
+        }
+        .info-card strong {
+            color: var(--primary);
+        }
+        .info-card a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            padding: 4px 0;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-family: inherit;
+            box-sizing: border-box;
+            background-color: #fafbfc;
+            font-size: 1rem;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(43, 108, 176, 0.1);
+        }
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            min-height: 50px;
+            transition: var(--transition);
+        }
+        .submit-btn:hover {
+            background-color: var(--primary-light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 35px 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Breakpoints Optimization */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 30px 20px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            html {
+                scroll-padding-top: 130px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 15px 10px;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .brand-logo img {
+                width: 140px; 
+                height: 45px;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 8px 12px;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 6px 4px;
+            }
+            .hero {
+                padding: 70px 16px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1.05rem;
+                margin-bottom: 30px;
+            }
+            .section {
+                padding: 50px 16px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .section-subtitle {
+                margin-bottom: 35px;
+                font-size: 1rem;
+            }
+            .about-content {
+                padding: 25px 16px;
+            }
+            .category-title {
+                font-size: 1.5rem;
+                margin: 40px 0 20px 0;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .product-card {
+                padding: 20px 16px;
+            }
+            .product-image-container {
+                height: 190px;
+            }
+            html {
+                scroll-padding-top: 155px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="brand-logo">
+                <img src="./jrslogo.jpg" alt="JRS Trading Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home" class="hero">
+        <h1>Welcome to JRS Trading</h1>
+        <span class="subtitle-badge">Authorized Distributor of Secure Meters Ltd.</span>
+        <p>Your trusted partner for high-precision energy management solutions, industrial metering, and comprehensive technical support.</p>
+        <a href="#products" class="cta-btn">Explore Our Products</a>
+    </div>
+
+    <div id="about" class="section">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-subtitle">JRS Trading is a premier distributor of advanced energy measurement solutions and high-precision industrial power equipment. As an authorized distributor of Secure Meters, we supply 100% genuine, factory-certified smart meters and revenue-grade instrumentation. We specialize in advanced three-phase commercial metering, digital panel monitoring, and specialized bi-directional solar net-metering configurations. Our products feature industry-leading surge endurance and anti-tamper mechanisms to guarantee absolute billing accuracy and revenue protection.</p>
+        
+        <div class="about-content">
+            <p>JRS Trading is a premier technical service and engineering provider specializing in state-of-the-art energy management technology. We successfully bridge the gap between world-class engineering manufacturing and local industrial infrastructure needs.</p>
+            
+            <h3>Our Mission</h3>
+            <p>To provide advanced, reliable, and high-precision metering solutions that empower power distribution utilities, plants, and high-volume consumers to monitor and optimize their energy efficiency seamlessly.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="products" class="section">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">Explore our latest high-performance Energy and Panel metering systems.</p>
+
+        <h3 class="category-title">⚡ Energy Meters</h3>
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/prometer100.jpg" alt="Three Phase High-Precision Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Prometer 100</span>
+                    <h3 class="product-name">Three Phase High-Precision Meter</h3>
+                    <p class="product-desc">A premium-class, high-precision energy meter designed for grid substations, power generation plants, and bulk consumers. Ideal for summation metering, tariff management, and custody transfer applications.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Prometer 100" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Premier300.jpg" alt="Three Phase LTCT / HTCT Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Premier 300</span>
+                    <h3 class="product-name">Three Phase LTCT / HTCT Meter</h3>
+                    <p class="product-desc">A high-end, CT-operated (Low Tension / High Tension) energy meter widely trusted by medium to heavy industries, utility grids, and substations for commercial billing and power monitoring.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for LTCT/HTCT Meter (Premier 300)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Premier300.jpg" alt="Three Phase LTCT / HTCT Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Premier 300</span>
+                    <h3 class="product-name">Three Phase LTCT / HTCT Bi-directional Meter</h3>
+                    <p class="product-desc">A high-end, CT-operated (Low Tension / High Tension) energy meter widely trusted by medium to heavy industries, utility grids, and substations for commercial billing and power monitoring.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for LTCT/HTCT Meter (Premier 300)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/net.jpg" alt="Three Phase Whole Current Bi-directional Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Saral 305</span>
+                    <h3 class="product-name">Three Phase Whole Current Bi-directional Meter</h3>
+                    <p class="product-desc">The perfect solution for Solar Net-Metering projects. This bi-directional meter accurately measures and records both energy import (from the grid) and export (from solar generation) simultaneously.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Bi-directional Meter (Saral 305)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/saral305-dual.jpg" alt="Dual Register Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Saral 305</span>
+                    <h3 class="product-name">Dual Register Meter</h3>
+                    <p class="product-desc">An advanced multi-tariff energy monitoring solution tailored for varying load requirements, offering comprehensive logging capabilities for reliable system distribution data tracking.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Dual Register Meter (Saral 305)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/saral305.jpg" alt="Three Phase Whole Current Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Saral 305</span>
+                    <h3 class="product-name">Three Phase Whole Current Meter</h3>
+                    <p class="product-desc">Engineered for commercial and light-industrial environments. This direct-connection (Whole Current) meter offers robust performance, high accuracy, and advanced data logging features.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Three Phase Whole Current Meter (Saral 305)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/saral.jpg" alt="Single Phase Energy Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Saral</span>
+                    <h3 class="product-name">Single Phase Energy Meter</h3>
+                    <p class="product-desc">A reliable and compact single-phase smart/energy meter designed for residential and small commercial consumers. It ensures high accuracy in energy measurement and tamper detection.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Single Phase Energy Meter (Saral)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/saral.jpg" alt="Single Phase Energy Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Saral</span>
+                    <h3 class="product-name">Single Phase Bi-directional Energy Meter</h3>
+                    <p class="product-desc">Compact, accurate and reliable Saral is a compact single-phase, direct-connected intelligent credit meter for domestic and small commercial metering applications, including net metering.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Single Phase Energy Meter (Saral)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/premier550.jpg" alt="Three Phase LTCT / HTCT Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Premier 550</span>
+                    <h3 class="product-name">Three Phase LTCT / HTCT Meter</h3>
+                    <p class="product-desc">A Premier 550 is a new generation three-phase instrument transformer-operated electricity meter, offering enriched firmware functionalities with data security.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Premier 550" class="quote-btn">Request a Quote</a>
+            </div>
+
+        </div>
+
+        <h3 class="category-title">🎛️ Panel Meters</h3>
+        <div class="product-grid">
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/amp.jpg" alt="Ampere Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: DPM96I100</span>
+                    <h3 class="product-name">Ampere Meter</h3>
+                    <p class="product-desc">A high-precision digital panel meter specifically engineered for accurate current measurement across diverse commercial and industrial setups.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Ampere Meter (DPM96I100)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/dpm96v.jpg" alt="Voltmeter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: DPM96V100</span>
+                    <h3 class="product-name">Voltmeter</h3>
+                    <p class="product-desc">Provides ultra-reliable and direct voltage readouts, essential for maintaining stable voltage distribution within structural frameworks.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Voltmeter (DPM96V100)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/dpm96m.jpg" alt="VAF Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: DPM96M310</span>
+                    <h3 class="product-name">VAF Meter</h3>
+                    <p class="product-desc">An efficient digital measurement unit built to track Voltage, Ampere, and Frequency parameter combinations simultaneously on integrated control screens.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for VAF Meter (DPM96M310)" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Elite500.jpg" alt="Advanced Multi-Function Panel Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Elite 500</span>
+                    <h3 class="product-name">Advanced Multi-Function Panel Meter</h3>
+                    <p class="product-desc">Features an advanced graphical display with power quality analysis (harmonics monitoring), extensive memory logging, and multi-protocol communication capabilities.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Elite 500" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Elite440.jpg" alt="High-Performance Multi-Function Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Elite 440</span>
+                    <h3 class="product-name">High-Performance Multi-Function Meter</h3>
+                    <p class="product-desc">A versatile multi-functional panel meter that accurately monitors electrical parameters including Voltage, Current, Frequency, Power Factor, and Energy.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Elite 440" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Elite300.jpg" alt="Digital Multi-Parameter Panel Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Elite 300</span>
+                    <h3 class="product-name">Digital Multi-Parameter Panel Meter</h3>
+                    <p class="product-desc">Provides precise measurement of power and energy metrics. Its sleek design and reliable performance make it ideal for industrial sub-metering.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Elite 300" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/elite102.jpg" alt="Compact Digital Panel Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Elite 102</span>
+                    <h3 class="product-name">Compact Digital Panel Meter</h3>
+                    <p class="product-desc">A highly compact and efficient digital meter tailored for basic electrical parameter monitoring with a clear, easy-to-read LED/LCD display.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Elite 102" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/elite30b.jpg" alt="Panel-Mounted Multi-Parameter Meter" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Elite 30B</span>
+                    <h3 class="product-name">Panel-Mounted Multi-Parameter Meter</h3>
+                    <p class="product-desc">An entry-level, robust panel meter designed for straightforward monitoring of basic electrical parameters, offering durability and essential data tracking.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Elite 30B" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/ct.jpg" alt="Low Voltage Current Transformers" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: LTCT</span>
+                    <h3 class="product-name">Low Voltage Current Transformers</h3>
+                    <p class="product-desc">A comprehensive range of reliable and accurate current transformers (CTs) for low-voltage industrial, commercial and residential metering applications.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for LTCT" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/PT3.jpg" alt="PT3 three-phase multi-function transducer" class="product-image">
+                    </div>
+                    <span class="model-badge">PT3 multi-function transducer</span>
+                    <h3 class="product-name">PT3 three-phase multi-function transducer</h3>
+                    <p class="product-desc">PT3 is a range of compact, configurable multiple-input transducers designed to meet the demanding needs of supply utilities and industrial applications.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for PT3" class="quote-btn">Request a Quote</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <div class="product-image-container">
+                        <img src="./images/Skyline.jpg" alt="Skyline E90 NB-IoT/GPRS modem" class="product-image">
+                    </div>
+                    <span class="model-badge">Model: Skyline E90</span>
+                    <h3 class="product-name">Skyline E90 NB-IoT/GPRS modem</h3>
+                    <p class="product-desc">Intelligent and reliable AMR Skyline E90 is a next generation IoT ready intelligent modem for data transfer between DLMS compliant electronic energy meter.</p>
+                </div>
+                <a href="mailto:jrstrading2008@gmail.com?subject=Inquiry for Skyline E90" class="quote-btn">Request a Quote</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Gallery Section (Permanent Image Setup) -->
+    <div id="gallery" class="section">
+        <h2 class="section-title">Product & Project Gallery</h2>
+        <p class="section-subtitle">View images of our recent onsite installations, operational testings, and infrastructure equipment versions.</p>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- স্থায়ীভাবে যুক্ত করা ১০টি চিত্রাবলি (a থেকে j সিরিয়াল) -->
+            <div class="gallery-item"><img src="./images/a.jpg" alt="Project Image a"></div>
+            <div class="gallery-item"><img src="./images/b.jpg" alt="Project Image b"></div>
+            <div class="gallery-item"><img src="./images/c.jpg" alt="Project Image c"></div>
+            <div class="gallery-item"><img src="./images/d.jpg" alt="Project Image d"></div>
+            <div class="gallery-item"><img src="./images/e.jpg" alt="Project Image e"></div>
+            <div class="gallery-item"><img src="./images/f.jpg" alt="Project Image f"></div>
+            <div class="gallery-item"><img src="./images/g.jpg" alt="Project Image g"></div>
+            <div class="gallery-item"><img src="./images/h.jpg" alt="Project Image h"></div>
+            <div class="gallery-item"><img src="./images/i.jpg" alt="Project Image i"></div>
+            <div class="gallery-item"><img src="./images/j.jpg" alt="Project Image j"></div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="services" class="section">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">As an authorized distributor of Secure Meters Ltd., JRS Trading operates primarily as a specialized importer and supplier of advanced electrical measurement and energy management infrastructure.</p>
+        
+        <div class="services-grid">
+            <div class="service-box">
+                <h3>Meter Management & Configuration</h3>
+                <p>Expert onsite configuration, parameter setting, and deployment for advanced energy metering networks including HTCT, LTCT, and grid summation setups.</p>
+            </div>
+
+            <div class="service-box">
+                <h3>Technical Drawing & SLD Design</h3>
+                <p>Comprehensive AutoCAD workflows, customized metering panel drawings, single-line diagrams (SLD), and technical meter box specification designs.</p>
+            </div>
+
+            <div class="service-box">
+                <h3>Testing & Commissioning</h3>
+                <p>Thorough field testing, CT/PT connection auditing, substation commissioning support, and integrated online power monitoring systems implementation.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="contact" class="section">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Have questions about our procurement or technical support? Get in touch with us today.</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>JRS Trading</h3>
+                <p>Shop-309, 1st Floor, Kaptan Bazar Complex Bhaban no-1, Gulistan, Dhaka-1203.</p>
+                <p>Feel free to reach out via email or visit our office setup for professional industrial instrumentation guidance.</p>
+                
+                <div class="info-card">
+                    <strong>📧 Email Address:</strong>
+                    <p><a href="mailto:jrstrading2008@gmail.com">jrstrading2008@gmail.com</a></p>
+                </div>
+
+                <div class="info-card">
+                    <strong>Call us:</strong>
+                    <p><a href="tel:+8801711473030">+8801711-473030</a></p>
+                    <p><a href="tel:+8801706520330">+8801706-520330</a></p>
+                </div>
+
+                <div class="info-card">
+                    <strong>Telephone :</strong>
+                    <p><a href="tel:+8802226639689">+8802226639689</a></p>
+                </div>
+
+                <div class="info-card">
+                    <strong>⏰ Business Hours:</strong>
+                    <p>Saturday – Thursday: 10:00 AM – 8:00 PM</p>
+                    <p>Friday: Closed</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been registered.');">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+                    <label for="message">Message / Technical Requirement</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Describe your metering specs or required service..." required></textarea>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 JRS Trading. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
